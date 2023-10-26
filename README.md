@@ -1,7 +1,7 @@
 # easy-ssh-init
 Initialize server from `~/.ssh/config`.
 
-## Security Warning
+## Security notes
 This script DOES NOT delete keys from server when you delete Host(s) in your `~/.ssh/config`.
 You DO have to delete unnecessary keys manually.
 
