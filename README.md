@@ -1,6 +1,11 @@
 # easy-ssh-init
 Initialize server ssh config from `~/.ssh/config`.
 
+# Security Warning
+This script DOES NOT delete keys from server when you delete Host(s) in your `~/.ssh/config`.
+You DO have to delete unnecessary keys manually.
+
+# Usage
 Assume you have a newly installed server on 192.168.1.1 which you can login 
 using password with `ssh root@192.168.1.1`
 
