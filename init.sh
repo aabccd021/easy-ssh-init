@@ -54,7 +54,7 @@ for host in $hosts; do
     continue
   fi
   if [ -z "$user" ]; then
-    echo "skipping: no user found for host $host"
+    echo "skipping: User not set for host $host"
     continue
   fi
 
@@ -64,7 +64,7 @@ for host in $hosts; do
     | sed "s#^~#$HOME#"\
   )
   if [ -z "$identityfile" ]; then
-    echo "skipping: no identityfile found for host $host"
+    echo "skipping: IdentityFile not set for host $host"
     continue
   fi
   if [ ! -f "$identityfile" ]; then
