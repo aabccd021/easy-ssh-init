@@ -31,10 +31,11 @@ for host in $hosts; do
 done
 
 if [ -z "$root_identityfile" ]; then
-  echo "no root user found for HostName $target_hostname"
+  echo "Error: no root user found for HostName $target_hostname" 1>&2
   exit 1
 fi
 
+echo "Configuring root"
 if [ ! -f "$root_identityfile" ]; then
   ssh-keygen -t ed25519 -f "$root_identityfile" -q -N ""
 fi
@@ -52,7 +53,6 @@ for host in $hosts; do
     continue
   fi
   if [ -z "$user" ]; then
-    echo "skipping: User not set for host $host"
     continue
   fi
 
@@ -62,17 +62,18 @@ for host in $hosts; do
     | sed "s#^~#$HOME#"\
   )
   if [ -z "$identityfile" ]; then
-    echo "skipping: IdentityFile not set for host $host"
     continue
   fi
   if [ ! -f "$identityfile" ]; then
     ssh-keygen -t ed25519 -f "$identityfile" -q -N ""
   fi
 
-  # create user if not exists
-  ssh -i "$root_identityfile" "root@$hostname" "id $user &>/dev/null || useradd -m $user"
+  echo "Configuring Host $host"
 
-  ssh -i "$root_identityfile" "root@$hostname" "mkdir -p /home/$user/.ssh"
-  ssh -i "$root_identityfile" "root@$hostname" "cat >> /home/$user/.ssh/authorized_keys" < "$identityfile.pub"
+  ssh -i "$root_identityfile" "root@$hostname" "
+    id $user &>/dev/null || useradd -m $user # create user if not exists
+    mkdir -p /home/$user/.ssh
+    cat >> /home/$user/.ssh/authorized_keys
+  " < "$identityfile.pub"
 
 done
