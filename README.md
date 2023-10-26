@@ -26,7 +26,7 @@ You can run:
 curl -sSf "https://raw.githubusercontent.com/aabccd021/easy-ssh-init/main/init.sh" | sh -s 192.168.1.1
 ```
 
-End results:
+The end results:
 - non-root user `gh` and it's home dir is created on the server if previously absent
 - `~/.ssh/contabo` is created if previously absent
 - `~/.ssh/contabo-gh` is created if previously absent
@@ -34,3 +34,10 @@ End results:
 - `~/.ssh/contabo-gh.pub` is copied to `192.168.1.1:/home/gh/.ssh/authorized_keys`
 - `ssh contabo` works
 - `ssh contabo-gh` works
+
+# Notes
+Although you can run this script multiple times,
+it's not designed to configure server in declarative (*vine boom effect*) manner, 
+hence this script:
+- will store duplicate `authorized_keys` when run multiple times with same `~/.ssh/config`
+- will not delete keys stored in `authorized_keys` when a `Host` is deleted/modified on `~/.ssh/config`
