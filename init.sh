@@ -11,7 +11,6 @@ target_hostname="$1"
 
 hosts=$(grep -E "^Host " ~/.ssh/config | sed 's/Host //')
 
-# search root_identityfile
 for host in $hosts; do
 
   hostname=$(ssh -G "$host" | grep "^hostname " | awk '{print $2}')
@@ -41,7 +40,6 @@ if [ ! -f "$root_identityfile" ]; then
 fi
 ssh-copy-id -i "$root_identityfile" "root@$target_hostname"
 
-# search root_identityfile
 for host in $hosts; do
 
   hostname=$(ssh -G "$host" | grep "^hostname " | awk '{print $2}')

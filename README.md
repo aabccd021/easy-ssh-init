@@ -1,14 +1,10 @@
 # easy-ssh-init
-Initialize server's ssh setting using `~/.ssh/config`.
+Initialize server ssh config from `~/.ssh/config`.
 
-## Example
+Assume you have a newly installed server on 192.168.1.1 which you can login 
+using password with `ssh root@192.168.1.1`
 
-Assume you have a newly installed server 
-- at 192.168.1.1
-- only root user exists
-- can `ssh root@192.168.1.1` using password
-
-Given `~/.ssh/config` on your local machine:
+Given this `~/.ssh/config` on your local machine:
 ```ssh_config
 Host contabo
   User root
@@ -26,8 +22,10 @@ curl -sSf "https://raw.githubusercontent.com/aabccd021/easy-ssh-init/main/init.s
 ```
 
 End results:
-- user `gh` and it's home dir is created at `192.168.1.1` if not exists
-- `~/.ssh/contabo` is created if not exists
-- `~/.ssh/contabo-gh` is created if not exists
+- non-root user `gh` and it's home dir is created on the server if previously absent
+- `~/.ssh/contabo` is created if previously absent
+- `~/.ssh/contabo-gh` is created if previously absent
 - `~/.ssh/contabo.pub` is copied to `192.168.1.1:/root/.ssh/authorized_keys`
 - `~/.ssh/contabo-gh.pub` is copied to `192.168.1.1:/home/gh/.ssh/authorized_keys`
+- `ssh contabo` works
+- `ssh contabo-gh` works
