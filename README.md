@@ -26,7 +26,7 @@ curl -sSf "https://raw.githubusercontent.com/aabccd021/easy-ssh-init/main/init.s
 ```
 
 End results:
-- user `gh` and it's home dir is created at `192.168.1.1`
+- user `gh` and it's home dir is created at `192.168.1.1` if not exists
 - `~/.ssh/contabo` is created if not exists
 - `~/.ssh/contabo-gh` is created if not exists
 - `~/.ssh/contabo.pub` is copied to `192.168.1.1:/root/.ssh/authorized_keys`
