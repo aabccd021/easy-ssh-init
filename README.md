@@ -11,18 +11,18 @@ using password with `ssh root@192.168.1.1`
 
 Given this `~/.ssh/config` on your local machine:
 ```ssh_config
-Host contabo
-  User root
+Host contabo-root
   HostName 192.168.1.1
+  User root
   IdentityFile ~/.ssh/contabo
 Host contabo-gh
-  User gh
   HostName 192.168.1.1
+  User gh
   IdentityFile ~/.ssh/contabo-gh
 ```
 
 You can run:
-```
+```sh
 curl -sSf "https://raw.githubusercontent.com/aabccd021/easy-ssh-init/main/init.sh" | sh -s 192.168.1.1
 ```
 
